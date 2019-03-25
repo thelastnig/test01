@@ -1,0 +1,238 @@
+<script>
+    (function () {
+        var url = document.URL
+        // Main
+        // https://www.kia.com/pr/main.html
+
+        if (url.match(/kia\.com\/pr\/main/)) {
+            ga('ddc_pr.send', 'event', 'conversion', 'homepage', {
+                nonInteraction: true
+            });
+        }
+
+
+        // https://www.kia.com/pr/showroom/features.html
+        // model page
+        if (url.match(/pr\/showroom\/((?!specification|gallery|accessories|cars|suv|commercial).)*$.*(\/features)?/)) {
+            var carModel = $('#footer .depth:eq(1)').text().toLowerCase().replace(/-/gi, " ").replace(/[aaaaaa]/g,
+                "a");
+            if (!carModel) {
+                carModel = "(not set)"
+            }
+            ga('ddc_pr.send', 'event', 'conversion', 'modelpage', carModel, {
+                'metric1': 1,
+                'dimension1': carModel,
+                nonInteraction: true
+            });
+        }
+
+        // https://www.kia.com/pr/showroom/newsoul/soul-build-spain.html
+        // model page _ new soul
+        if (url.match(/pr\/showroom\/newsoul/)) {
+            var carModel = $('#footer .depth:eq(1)').text().toLowerCase().replace(/-/gi, " ").replace(/[aaaaaa]/g,
+                "a");
+            if (!carModel) {
+                carModel = "(not set)"
+            }
+            ga('ddc_pr.send', 'event', 'conversion', 'modelpage', carModel, {
+                'metric1': 1,
+                'dimension1': carModel,
+                nonInteraction: true
+            });
+        }
+
+
+        // https://www.kia.com/pr/shopping-tools/download-a-brochure.html
+        // brochuredownload entered
+        if (url.match(/download-a-brochure/)) {
+            ga('ddc_pr.send', 'event', 'conversion', 'brochuredownload_entered', {
+                'metric2': 1,
+                nonInteraction: true
+            });
+        }
+
+
+        // https://www.kia.com/pr/shopping-tools/download-a-brochure.html
+        // borchuredownload confirmed
+        if (url.match(/download-a-brochure/)) {
+            $(document).on("click", '.btnSmall.btnType7[ng-click*="downloadFile"]', function (e) {
+                var carModel = $(e.target).closest(".car_box.add_btn").children('.car_a').attr("title").toLowerCase()
+                    .replace(/-/gi, " ").replace(/[aaaaaa]/g, "a");
+                if (!carModel) {
+                    carModel = "(not set)"
+                }
+                ga('ddc_pr.send', 'event', 'conversion', 'brochuredownload_confirmed', carModel, {
+                    'metric3': 1,
+                    'dimension1': carModel
+                });
+            });
+        }
+
+
+        // https://www.kia.com/pr/shopping-tools/request-a-quote.html
+        // quotation entered
+        if (url.match(/request-a-quote\.html/)) {
+            ga('ddc_pr.send', 'event', 'conversion', 'quotation_entered', {
+                'metric4': 1,
+                nonInteraction: true
+            });
+        }
+
+        // https://www.kia.com/pr/shopping-tools/request-a-quote.html
+        // quotation confirmed
+        if (url.match(/request-a-quote\.html/)) {
+            
+            $("a.btnMedium.btnType1").click(function(){
+
+                var div = $(this).parent().parent().prev();
+
+                if (div.hasClass('bar04')) {
+                    var carModel = $('tbody .car_name.ng-binding:eq(0)').text().toLowerCase().replace(/-/gi,
+                        " ").replace(/[aaaaaa]/g, "a");
+                    if (!carModel) {
+                        carModel = "(not set)"
+                    }
+
+                    ga('ddc_pr.send', 'event', 'conversion', 'quotation_confirmed', carModel, {
+                        'metric5': 1,
+                        'dimension1': carModel
+                    });
+                }
+
+            });
+        }
+
+        // https://www.kia.com/pr/shopping-tools/request-a-test-drive.html
+        // test dirve entered
+        if (url.match(/request-a-test-drive\.html/)) {
+            ga('ddc_pr.send', 'event', 'conversion', 'testdrive_entered', {
+                'metric6': 1,
+                nonInteraction: true
+            });
+        }
+
+        // https://www.kia.com/pr/shopping-tools/request-a-test-drive.html
+        // test drive confirmed
+        if (url.match(/request-a-test-drive\.html/)) {
+            
+            $("a.btnMedium.btnType1").click(function(){
+
+                var div = $(this).parent().parent().prev();
+
+                if (div.hasClass('bar04')) {
+                    var carModel = $('tbody .car_name.ng-binding:eq(0)').text().toLowerCase().replace(/-/gi,
+                        " ").replace(/[aaaaaa]/g, "a");
+                    if (!carModel) {
+                        carModel = "(not set)"
+                    }
+                    
+                    ga('ddc_pr.send', 'event', 'conversion', 'testdrive_confirmed', carModel, {
+                    'metric7': 1,
+                    'dimension1': carModel
+                    });
+                }
+
+            });
+        }
+
+
+        // https://www.kia.com/pr/util/customer-center/contact-us.html
+        //contacus entered
+        if (url.match(/contact-us/)) {
+            ga('ddc_pr.send', 'event', 'conversion', 'contactus_entered', {
+                'metric8': 1,
+                nonInteraction: true
+            });
+        }
+
+        // https://www.kia.com/pr/util/customer-center/contact-us.html
+        //contacus confiremd
+        if (url.match(/contact-us/)) {
+            $('.cuBtn a.btnMedium.btnType1').click(function () {
+                ga('ddc_pr.send', 'event', 'conversion', 'contactus_confirmed', {
+                    'metric9': 1
+                });
+            });
+        }
+
+
+        // https://www.kia.com/pr/shopping-tools/find-a-dealer.html
+        // find delar
+        if (url.match(/find-a-dealer/)) {
+            ga('ddc_pr.send', 'event', 'conversion', 'dealerlocation_confirmed', {
+                'metric10': 1,
+                nonInteraction: true
+            });
+        }
+
+
+        // https://www.kia.com/pr/shopping-tools/payment-estimator.html
+        // payment-estimator entered
+        if (url.match(/payment-estimator\.html/)) {
+            ga('ddc_pr.send', 'event', 'conversion', 'paymentestimator_entered', {
+                'metric12': 1,
+                nonInteraction: true
+            });
+        }
+
+
+        // https://www.kia.com/pr/shopping-tools/payment-estimator.html
+        // payment-estimator confirmed
+        if (url.match(/payment-estimator\.html/)) {
+            $("a.btnMedium.btnType1").click(function(){
+
+                var div = $(this).parent().parent().prev();
+
+                if (div.hasClass('bar03')) {
+                    var carModel = $('.stepbar.bar01 .carName').text().toLowerCase().replace(/-/gi,
+                        " ").replace(/[aaaaaa]/g, "a");
+                    if (!carModel) {
+                        carModel = "(not set)"
+                    }
+
+                    ga('ddc_pr.send', 'event', 'conversion', 'paymentestimator_confirmed', carModel, {
+                        'metric13': 1,
+                        'dimension1': carModel
+                    })
+                }
+
+            });
+        }
+
+
+        // https://www.kia.com/pr/shopping-tools/build-your-own.html
+        // Bulid-your-own entered
+        if (url.match(/build-your-own\.html/)) {
+            ga('ddc_pr.send', 'event', 'conversion', 'configurator_entered', {
+                'metric14': 1,
+                nonInteraction: true
+            });
+        }
+
+
+        // https://www.kia.com/pr/shopping-tools/build-your-own.html
+        // Bulid-your-own confirmed
+        if (/build-your-own/.test(url)) {
+            $("a.btnMedium.btnType1").click(function(){
+
+            var text = $(this).find("span").text();
+
+            if (text == "Completar" && $(this).attr('href').indexOf("move") > -1) {
+                var carModel = $('.ex_img img').attr('alt').toLowerCase().replace(/-/gi,
+                    " ").replace(/[aaaaaa]/g, "a");
+                if (!carModel) {
+                    carModel = "(not set)"
+                }
+
+                ga('ddc_pr.send', 'event', 'conversion', 'configurator_complete', carModel, {
+                    'metric15': 1,
+                    'dimension1': carModel
+                })
+            }
+            });
+        }
+
+
+        
+    })()
+</script>
